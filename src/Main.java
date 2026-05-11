@@ -72,6 +72,10 @@ public class Main
         nContatti--;
     }
 
+    public static void modify_entry(){
+
+    }
+
     public static void stampaRubrica() {
         for (int i = 0; i<nContatti; i++){
             if (rubrica[0][0]==null){
