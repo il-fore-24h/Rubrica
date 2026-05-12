@@ -1,0 +1,2 @@
+Scrivere il programma in. Java per la gestione della rubrica del telefono. Ogni contattto é caratterizzato da nome, cognome e numero di telefono. Si implementino 3 liste una per ogni attributo, accoppiate. L’applicazione offre le funzionalità per:
+Aggiungere un contatto, cancellare un contatto, modificare un contatto, cercare un contatto ( nome, cognome, numero), lista parziale dei contatti (lettera iniziale), stampare la rubrica, ordinare la rubrica per nome, cognome o numero di cellulare.
