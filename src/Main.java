@@ -42,13 +42,9 @@ public class Main
                     break;
                 case 4:
                     stampaRubrica();
+
                     modify_entry(
-                            selector(),
-                            {
-                                
-                            },
-                            "non",
-                            "parlare"
+                            selector()
                     );
                     break;
                 case 5:
@@ -79,12 +75,6 @@ public class Main
         nContatti--;
     }
 
-    public static void modify_entry(int index, String nome, String cognome, String numero){
-        rubrica[0][index] = nome;
-        rubrica[1][index] = cognome;
-        rubrica[2][index] = numero;
-    }
-
     public static int stampaRubrica() {
         int val = 0;
         for (int i = 0; i<nContatti; i++){
@@ -109,6 +99,47 @@ public class Main
             System.out.print("Inserisci numero da 1 a " + rubrica[0].length + ": ");
             input = sc.nextInt() - 1;
         }while (input < 0 || input>rubrica[0].length);
+
         return input;
+    }
+
+    public static void modify_entry(int index){
+        String[] dati = asker(index);
+
+        System.out.println("Contatto numero: " + index);
+        System.out.println("Nome = " + rubrica[0][index]);
+        System.out.println("Cognome = " + rubrica[1][index]);
+        System.out.println("Numero = " + rubrica[2][index]);
+
+        rubrica[0][index] = dati[0];
+        rubrica[1][index] = dati[1];
+        rubrica[2][index] = dati[2];
+    }
+
+    public static String[] asker(int ind){
+        String[] dati = new String[3];
+        boolean done = false;
+        while (!done) {
+            System.out.print("Scegli tra: \n1. Nome\n2. Cognome\n3. Numero\n4. Esci\n\nScelta: ");
+            switch (sc.nextInt()) {
+                case 1:
+                    System.out.print("Inserisci nome: ");
+                    dati[0] = sc.next();
+                    break;
+                case 2:
+                    System.out.print("Inserisci cognome: ");
+                    dati[1] = sc.next();
+                    break;
+                case 3:
+                    System.out.print("Inserisci numero: ");
+                    dati[2] = sc.next();
+                    break;
+                case 4:
+                    done = true;
+                default:
+                    break;
+            }
+        }
+        return  dati;
     }
 }
