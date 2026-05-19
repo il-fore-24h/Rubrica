@@ -181,7 +181,10 @@ public class Main
     }
     public static void stampArr(int[] arr){
         for (int j : arr) {
-            System.out.println(j);
+            System.out.println(rubrica[0][j]);
+            System.out.println(rubrica[1][j]);
+            System.out.println(rubrica[2][j]);
         }
+        System.out.println();
     }
 }
