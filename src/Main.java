@@ -1,15 +1,12 @@
 /******************************************************************************
 
- Welcome to GDB Online.
- GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
- C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
- Code, Compile, Run and Debug online from anywhere in world.
+Rubrica rustica e Casereccia fatta da Utopia (aka ForTheFire)
 
  *******************************************************************************/
 import java.util.Scanner;
 public class Main
 {
-    public static String[][] rubrica = new String[3][10]; //primo nome, secondo cognome, terzo numero
+    public static String[][] rubrica = new String[3][100]; //primo nome, secondo cognome, terzo numero
     public static int nContatti = 0;
     public static Scanner sc = new Scanner(System.in);
 
@@ -20,7 +17,9 @@ public class Main
         while(!done){
             System.out.print("1. Registra un nuovo contatto\n2. Elimina contatto\n3. Stampa rubrica\n4. Modifica contatto\n5. Esci\n");
             System.out.print("Scegli: ");
-            input = sc.nextInt();
+
+            input = sc.nextInt(); // Vorrei implementare try per catch un errore e darlo per non valido
+
             switch(input){
                 case 1:
                     System.out.print("Inserisci nome: ");
@@ -32,23 +31,23 @@ public class Main
                     register_entry(nome, cognome, numero);
                     break;
                 case 2:
-                    stampaRubrica();
                     delete_entry(
-                            selector()
+                            selector(stampaRubrica())
                     );
                     break;
                 case 3:
                     stampaRubrica();
                     break;
                 case 4:
-                    stampaRubrica();
-
                     modify_entry(
-                            selector()
+                            selector(stampaRubrica())
                     );
                     break;
                 case 5:
                     done=true;
+                    break;
+                case 6:
+                    stampArr(cercaIniziale(String.valueOf(sc.next().charAt(0))));
                     break;
                 default:
                     break;
@@ -89,14 +88,16 @@ public class Main
             System.out.println(rubrica[2][i]);
             val++;
         }
+        System.out.println();
+        System.out.println();
         return val;
     }
 
-    public static int selector(){
+    public static int selector(int lunghezza){
         int input;
 
         do{
-            System.out.print("Inserisci numero da 1 a " + rubrica[0].length + ": ");
+            System.out.print("Inserisci numero da 1 a " + lunghezza + ": ");
             input = sc.nextInt() - 1;
         }while (input < 0 || input>rubrica[0].length);
 
@@ -110,6 +111,7 @@ public class Main
         System.out.println("Nome = " + rubrica[0][index]);
         System.out.println("Cognome = " + rubrica[1][index]);
         System.out.println("Numero = " + rubrica[2][index]);
+        System.out.println();
 
         rubrica[0][index] = dati[0];
         rubrica[1][index] = dati[1];
@@ -141,5 +143,45 @@ public class Main
             }
         }
         return  dati;
+    }
+
+    public static int[] cercaIniziale(String sel){
+        int nRisultati = 0;
+        Integer[] risultati = new Integer[nContatti * 2];
+        // Nome
+        for (int i = 0; i < nContatti; i++){
+            if (rubrica[0][i].startsWith(sel)){
+                risultati[nRisultati] = i;
+                nRisultati++;
+            }
+        }
+        // Cognome
+        for (int i = 0; i < nContatti; i++){
+            if (rubrica[1][i].startsWith(sel)){
+                risultati[nRisultati] = i;
+                nRisultati++;
+            }
+        }
+
+        return polisher(risultati);
+    }
+    public static int[] polisher(Integer[] input){
+        int lenght = 0;
+        for (Integer integer : input) {
+            if (integer != null) {
+                lenght++;
+            }
+        }
+
+        int[] polished = new int[lenght];
+        for (int i = 0; i<polished.length; i++){
+            polished[i] = input[i];
+        }
+        return polished;
+    }
+    public static void stampArr(int[] arr){
+        for (int j : arr) {
+            System.out.println(j);
+        }
     }
 }
